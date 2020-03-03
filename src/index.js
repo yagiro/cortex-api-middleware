@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
+import reduxThunk from 'redux-thunk';
 import { apiMiddleware } from 'redux-api-middleware';
 import './index.css';
 import App from './App';
@@ -16,8 +17,9 @@ const store = createStore(
     reducer,
     undefined,
     applyMiddleware(
-        logger,
         apiMiddleware,
+        reduxThunk,
+        logger,
     )
 );
 
