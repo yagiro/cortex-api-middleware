@@ -1,10 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import logger from 'redux-logger';
+import { apiMiddleware } from 'redux-api-middleware';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const reducer = (state = {}, action) => {
+    return state;
+};
+
+const store = createStore(
+    reducer,
+    undefined,
+    applyMiddleware(
+        logger,
+        apiMiddleware,
+    )
+);
+
+window.store = store;
+
+ReactDOM.render((
+    <Provider store={store}>
+        <App />
+    </Provider>
+), document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
