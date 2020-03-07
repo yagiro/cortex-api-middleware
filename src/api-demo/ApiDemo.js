@@ -1,22 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getTokens } from '../api/api';
+import { getTokensAndSetAuthHeader } from '../api/cortexApi';
 
 const username = 'yakir';
 const password = 'mypass123';
 
-const ApiDemo = ({ getTokens }) => {
+const ApiDemo = ({ getTokensAndSetAuthHeader }) => {
 
     const handleLoginClick = () =>
-        getTokens(username, password)
-            // .then(responseAction => {
-            //     const { access_token } = responseAction.payload;
-            //     setDefaultHeader('cortex', 'Authorization', `Bearer ${ access_token }`);
-            //     console.log('logged in.', responseAction);
-            // })
-            // .catch(failureAction => {
-            //     console.log('failed to log in.', failureAction);
-            // });            
+        getTokensAndSetAuthHeader(username, password);        
 
     return (
         <div>
@@ -27,7 +19,7 @@ const ApiDemo = ({ getTokens }) => {
 }
 
 const mdtp = {
-    getTokens,//: promisifyApiAction(getTokens),
+    getTokensAndSetAuthHeader,
 };
 
 export default connect(null, mdtp)(ApiDemo);
